@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Button } from "@/components/ui/Button";
-import { ProductCard } from "@/components/ProductCard";
 import { catalogData } from "@/data/products";
-import { ArrowLeft, Star, Clock, Truck, ShieldCheck, Heart } from "lucide-react";
+import { Star, Clock, Truck, ShieldCheck, Heart, ChevronLeft } from "lucide-react";
 
 export default function Home() {
   const scrollToSection = (id: string) => {
@@ -108,49 +108,52 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CATEGORIES / CATALOG SECTION */}
+        {/* CATEGORIES GRID SECTION */}
         <section id="categories" className="py-24 bg-background relative">
-          {/* Subtle background decoration */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-secondary font-bold tracking-wider uppercase text-sm mb-3">القائمة الرئيسية</h2>
-              <h3 className="text-4xl md:text-5xl font-black text-foreground mb-6">أشهى منتجاتنا</h3>
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <h2 className="text-secondary font-bold tracking-wider uppercase text-sm mb-3">أقسام المتجر</h2>
+              <h3 className="text-4xl md:text-5xl font-black text-foreground mb-5">اختر القسم الذي تريده</h3>
               <p className="text-muted-foreground text-lg">
-                نحضر لكم يومياً تشكيلة واسعة من الكيك، المعجنات والحلويات العربية بأيادي أمهر الخبازين وباستخدام أجود المكونات الطبيعية.
+                اضغط على أي قسم لتصفح منتجاته
               </p>
             </div>
 
-            <div className="space-y-24">
-              {catalogData.map((category, catIndex) => (
-                <div key={category.id} className="scroll-mt-32" id={category.id}>
-                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b-2 border-border/50">
-                    <div>
-                      <h4 className="text-3xl font-black text-primary mb-2 flex items-center gap-3">
-                        <Star className="text-secondary fill-secondary w-6 h-6" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
+              {catalogData.map((category, i) => (
+                <motion.div
+                  key={category.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                >
+                  <Link href={`/category/${category.id}`}>
+                    <div className="group relative bg-card border border-border rounded-2xl p-5 text-center cursor-pointer hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 active:scale-95 h-full flex flex-col items-center justify-center gap-3 min-h-[140px]">
+                      {/* Count badge */}
+                      {category.products.length > 0 && (
+                        <span className="absolute top-3 start-3 bg-secondary text-primary text-xs font-black px-2 py-0.5 rounded-full">
+                          {category.products.length}
+                        </span>
+                      )}
+
+                      <span className="text-4xl md:text-5xl">{category.emoji}</span>
+                      <h3 className="font-black text-foreground text-base md:text-lg leading-tight group-hover:text-primary transition-colors">
                         {category.title}
-                      </h4>
-                      <p className="text-muted-foreground font-medium">{category.description}</p>
-                    </div>
-                  </div>
-                  
-                  {category.products.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                      {category.products.map((product, prodIndex) => (
-                        <ProductCard key={product.id} product={product} index={prodIndex} />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-16 text-center border-2 border-dashed border-border rounded-2xl bg-muted/30">
-                      <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
-                        <Star className="w-8 h-8 text-secondary/50" />
+                      </h3>
+
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-secondary transition-colors font-medium">
+                        {category.products.length > 0
+                          ? <><Star className="w-3 h-3 fill-current" />{category.products.length} منتج</>
+                          : <span>قريباً</span>
+                        }
+                        <ChevronLeft className="w-3 h-3" />
                       </div>
-                      <p className="text-xl font-bold text-muted-foreground mb-1">قريباً</p>
-                      <p className="text-sm text-muted-foreground/70">سيتم إضافة منتجات هذا القسم قريباً</p>
                     </div>
-                  )}
-                </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>

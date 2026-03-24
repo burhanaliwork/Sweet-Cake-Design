@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
+import CategoryPage from "@/pages/CategoryPage";
 
 const queryClient = new QueryClient();
 
@@ -12,16 +13,16 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/category/:id" component={CategoryPage} />
       <Route component={NotFound} />
     </Switch>
   );
 }
 
 function App() {
-  // Ensure RTL is applied at the root level for styling consistency
   useEffect(() => {
-    document.documentElement.dir = 'rtl';
-    document.documentElement.lang = 'ar';
+    document.documentElement.dir = "rtl";
+    document.documentElement.lang = "ar";
   }, []);
 
   return (

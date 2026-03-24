@@ -1,0 +1,214 @@
+import { motion } from "framer-motion";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { Button } from "@/components/ui/Button";
+import { ProductCard } from "@/components/ProductCard";
+import { catalogData } from "@/data/products";
+import { ArrowLeft, Star, Clock, Truck, ShieldCheck, Heart } from "lucide-react";
+
+export default function Home() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col w-full bg-background overflow-x-hidden">
+      <Navbar />
+      
+      <main className="flex-grow">
+        {/* HERO SECTION */}
+        {/* landing page hero bakery interior */}
+        <section 
+          id="hero"
+          className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-20"
+        >
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1920&q=80" 
+              alt="مخابز باب الآغا" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/40" />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="max-w-2xl text-white">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 border border-secondary/50 text-secondary font-bold text-sm mb-6 backdrop-blur-sm">
+                  مخبوزات وحلويات عراقية أصلية
+                </span>
+                <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 drop-shadow-lg">
+                  حكاية طعم <br/>
+                  <span className="text-secondary">تتوارثها الأجيال</span>
+                </h1>
+                <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed font-medium max-w-lg drop-shadow">
+                  للماضي حكاية وطعم ... خبز وحلويات باب الآغا ... حار ومكسب ورخيص. نقدم لكم أجود المنتجات منذ عام 1948 في قلب بغداد.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button size="lg" onClick={() => scrollToSection('categories')}>
+                    تصفح المنيو
+                  </Button>
+                  <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white" onClick={() => scrollToSection('about')}>
+                    تعرف على قصتنا
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+          
+          {/* Decorative scroll indicator */}
+          <motion.div 
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 hidden md:flex flex-col items-center gap-2"
+          >
+            <span className="text-xs font-bold tracking-widest uppercase">اكتشف المزيد</span>
+            <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent" />
+          </motion.div>
+        </section>
+
+        {/* STATS / FEATURES SECTION */}
+        <section className="py-12 bg-primary text-primary-foreground relative z-20 shadow-2xl">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-x-reverse divide-white/10">
+              {[
+                { icon: Clock, title: "منذ 1948", desc: "خبرة وأصالة" },
+                { icon: Heart, title: "825K+ متابع", desc: "ثقة عملائنا" },
+                { icon: Truck, title: "توصيل سريع", desc: "لكافة أنحاء العراق" },
+                { icon: ShieldCheck, title: "جودة عالية", desc: "مكونات طبيعية 100%" },
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex flex-col items-center text-center px-4"
+                >
+                  <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-4 text-secondary">
+                    <stat.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-1">{stat.title}</h3>
+                  <p className="text-primary-foreground/70 text-sm font-medium">{stat.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CATEGORIES / CATALOG SECTION */}
+        <section id="categories" className="py-24 bg-background relative">
+          {/* Subtle background decoration */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-secondary font-bold tracking-wider uppercase text-sm mb-3">القائمة الرئيسية</h2>
+              <h3 className="text-4xl md:text-5xl font-black text-foreground mb-6">أشهى منتجاتنا</h3>
+              <p className="text-muted-foreground text-lg">
+                نحضر لكم يومياً تشكيلة واسعة من الكيك، المعجنات والحلويات العربية بأيادي أمهر الخبازين وباستخدام أجود المكونات الطبيعية.
+              </p>
+            </div>
+
+            <div className="space-y-24">
+              {catalogData.map((category, catIndex) => (
+                <div key={category.id} className="scroll-mt-32" id={category.id}>
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b-2 border-border/50">
+                    <div>
+                      <h4 className="text-3xl font-black text-primary mb-2 flex items-center gap-3">
+                        <Star className="text-secondary fill-secondary w-6 h-6" />
+                        {category.title}
+                      </h4>
+                      <p className="text-muted-foreground font-medium">{category.description}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {category.products.map((product, prodIndex) => (
+                      <ProductCard key={product.id} product={product} index={prodIndex} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ABOUT US SECTION */}
+        {/* baker making dough */}
+        <section id="about" className="py-24 bg-card relative overflow-hidden">
+          <div className="absolute inset-0 bg-pattern opacity-30 mix-blend-multiply" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                  <div className="absolute inset-0 border-4 border-white/20 rounded-3xl z-10 m-4 pointer-events-none" />
+                  <img 
+                    src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1000&q=80" 
+                    alt="داخل مخابز باب الآغا" 
+                    className="w-full aspect-[4/5] object-cover"
+                  />
+                  <div className="absolute bottom-6 start-6 end-6 glass-panel rounded-2xl p-6 text-center z-20">
+                    <p className="text-2xl font-black text-primary">حار ومكسب ورخيص</p>
+                    <p className="text-foreground/80 font-bold">شعارنا الذي كبرت عليه أجيال</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="space-y-6"
+              >
+                <h2 className="text-secondary font-bold tracking-wider text-sm">تاريخ عريق</h2>
+                <h3 className="text-4xl md:text-5xl font-black text-primary leading-tight">
+                  حكاية أصيلة <br/>منذ عام 1948
+                </h3>
+                
+                <div className="space-y-4 text-lg text-foreground/80 leading-relaxed font-medium">
+                  <p>
+                    تأسست مخابز باب الآغا عام 1948 في قلب بغداد العريقة. بدأت رحلتنا بحكاية بسيطة من خبز يُحمل في السلال عبر شوارع بغداد الأصيلة، ليصل دافئاً وطازجاً إلى كل بيت.
+                  </p>
+                  <p>
+                    على مدى أكثر من 75 عاماً، كبرنا معكم وأصبحنا رمزاً للحلاوة والأصالة العراقية. نحن لا نصنع الخبز والحلويات فحسب، بل نصنع ذكريات تشاركونها مع من تحبون.
+                  </p>
+                  <p>
+                    اليوم، ومن قلب منطقة العويريج الصناعية، نفخر بتقديم أجود أنواع الكيك، المعجنات، والحلويات العربية المصنوعة بوصفات تقليدية متوارثة، ونوصل طعمنا الأصيل إلى جميع أنحاء العراق.
+                  </p>
+                </div>
+
+                <div className="pt-8">
+                  <Button size="lg" onClick={() => window.open('https://wa.me/9647830003337')}>
+                    تواصل معنا الآن
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <FloatingWhatsApp />
+    </div>
+  );
+}

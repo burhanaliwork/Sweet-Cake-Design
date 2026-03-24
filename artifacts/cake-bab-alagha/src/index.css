@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: hsl(45 30% 96%);
+  --color-foreground: hsl(20 40% 15%);
+  
+  --color-primary: hsl(25 60% 30%);
+  --color-primary-foreground: hsl(45 30% 96%);
+  
+  --color-secondary: hsl(38 85% 55%);
+  --color-secondary-foreground: hsl(20 40% 15%);
+  
+  --color-accent: hsl(42 90% 70%);
+  --color-accent-foreground: hsl(20 40% 15%);
+  
+  --color-muted: hsl(30 20% 90%);
+  --color-muted-foreground: hsl(25 30% 40%);
+  
+  --color-border: hsl(25 30% 85%);
+  --color-ring: hsl(38 85% 55%);
+  
+  --color-card: hsl(45 40% 98%);
+  --color-card-foreground: hsl(20 40% 15%);
+
+  --font-sans: 'Cairo', sans-serif;
+  --font-heading: 'Cairo', sans-serif;
+
+  --shadow-soft: 0 4px 20px -2px rgba(60, 30, 10, 0.05);
+  --shadow-glow: 0 0 20px rgba(212, 150, 42, 0.3);
+}
+
+:root {
+  --background: 45 30% 96%;
+  --foreground: 20 40% 15%;
+  --primary: 25 60% 30%;
+  --secondary: 38 85% 55%;
+}
+
+@layer base {
+  html {
+    direction: rtl;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-secondary selection:text-secondary-foreground;
+    background-image: radial-gradient(circle at top right, rgba(212, 150, 42, 0.03), transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(122, 60, 30, 0.03), transparent 40%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-primary;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .bg-pattern {
+    background-image: url('/images/pattern-bg.png');
+    background-repeat: repeat;
+    background-size: 400px;
+    background-blend-mode: fixed;
+  }
+
+  .glass-panel {
+    @apply bg-background/80 backdrop-blur-md border border-white/20 shadow-soft;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(45 30% 96%); 
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(25 30% 80%); 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(25 60% 30%); 
+}

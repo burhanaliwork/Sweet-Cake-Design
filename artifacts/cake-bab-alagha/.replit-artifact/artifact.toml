@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "كيك باب الأغا - المتجر الرسمي"
+version = "1.0.0"
+id = "artifacts/cake-bab-alagha"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19287
+
+[services.development]
+run = "pnpm --filter @workspace/cake-bab-alagha run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cake-bab-alagha", "run", "build" ]
+publicDir = "artifacts/cake-bab-alagha/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19287"
+BASE_PATH = "/"

@@ -1,0 +1,17 @@
+packages:
+  "framer-motion": "For smooth scroll reveals and page transitions"
+  "clsx": "For conditional class name joining"
+  "tailwind-merge": "For merging tailwind classes in components"
+
+images:
+  - path: "artifacts/cake-bab-alagha/public/images/pattern-bg.png"
+    description: "Subtle elegant arabic geometric seamless pattern in very light cream and gold, minimal opacity"
+    aspect_ratio: "16:9"
+  - path: "artifacts/cake-bab-alagha/public/images/logo-icon.png"
+    description: "Elegant minimalist bakery logo icon featuring a wheat stalk and a traditional oven in rich brown and gold, transparent background"
+    aspect_ratio: "1:1"
+
+notes:
+  - "The app is strictly a frontend showcase for a bakery."
+  - "The entire application must be in Arabic (RTL)."
+  - "No backend API integration is required as this is a static catalog/landing page."

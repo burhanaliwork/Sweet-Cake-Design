@@ -135,11 +135,21 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    {category.products.map((product, prodIndex) => (
-                      <ProductCard key={product.id} product={product} index={prodIndex} />
-                    ))}
-                  </div>
+                  {category.products.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                      {category.products.map((product, prodIndex) => (
+                        <ProductCard key={product.id} product={product} index={prodIndex} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-16 text-center border-2 border-dashed border-border rounded-2xl bg-muted/30">
+                      <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
+                        <Star className="w-8 h-8 text-secondary/50" />
+                      </div>
+                      <p className="text-xl font-bold text-muted-foreground mb-1">قريباً</p>
+                      <p className="text-sm text-muted-foreground/70">سيتم إضافة منتجات هذا القسم قريباً</p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

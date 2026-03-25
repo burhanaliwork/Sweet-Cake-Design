@@ -35,7 +35,7 @@ export default function Home() {
         {/* landing page hero bakery interior */}
         <section 
           id="hero"
-          className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-20"
+          className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-40 md:pt-28"
         >
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">

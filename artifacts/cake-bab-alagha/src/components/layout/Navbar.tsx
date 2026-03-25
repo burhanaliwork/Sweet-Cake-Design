@@ -46,18 +46,12 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition-transform border-2 border-secondary/40">
               <img 
-                src={`${import.meta.env.BASE_URL}images/logo-icon.png`} 
-                alt="Logo" 
-                className="w-8 h-8 object-contain"
-                onError={(e) => {
-                  // Fallback if image fails to load
-                  (e.target as HTMLImageElement).style.display = 'none';
-                  (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                }}
+                src={`${import.meta.env.BASE_URL}images/logo-real.jpg`} 
+                alt="شعار باب الآغا" 
+                className="w-full h-full object-cover"
               />
-              <span className="text-primary-foreground font-bold text-xl hidden">ب</span>
             </div>
             <div className="flex flex-col">
               <span className={cn(

@@ -13,14 +13,11 @@ export function Footer() {
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                 <img 
-                  src={`${import.meta.env.BASE_URL}images/logo-icon.png`} 
-                  alt="Logo" 
-                  className="w-8 h-8 object-contain brightness-0 invert"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary/40">
+                <img 
+                  src={`${import.meta.env.BASE_URL}images/logo-real.jpg`} 
+                  alt="شعار باب الآغا" 
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-2xl font-black text-white">باب الآغا</h3>

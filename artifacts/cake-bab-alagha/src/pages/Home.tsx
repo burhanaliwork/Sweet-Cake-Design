@@ -70,7 +70,7 @@ export default function Home() {
                   <Button size="lg" onClick={() => scrollToSection('categories')}>
                     تصفح المنتجات
                   </Button>
-                  <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white" onClick={() => scrollToSection('about')}>
+                  <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white" onClick={() => scrollToSection('about-text')}>
                     تعرف على قصتنا
                   </Button>
                 </div>
@@ -175,32 +175,15 @@ export default function Home() {
           <div className="absolute inset-0 bg-pattern opacity-30 mix-blend-multiply" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div 
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-              >
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                  <div className="absolute inset-0 border-4 border-white/20 rounded-3xl z-10 m-4 pointer-events-none" />
-                  <img 
-                    src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1000&q=80" 
-                    alt="داخل مخابز باب الآغا" 
-                    className="w-full aspect-[4/5] object-cover"
-                  />
-                  <div className="absolute bottom-6 start-6 end-6 glass-panel rounded-2xl p-6 text-center z-20">
-                    <p className="text-2xl font-black text-primary">حار ومكسب ورخيص</p>
-                    <p className="text-foreground/80 font-bold">شعارنا الذي كبرت عليه أجيال</p>
-                  </div>
-                </div>
-              </motion.div>
 
+              {/* Text first so mobile scroll lands on text */}
               <motion.div 
+                id="about-text"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="space-y-6"
+                className="space-y-6 order-first lg:order-last"
               >
                 <h2 className="text-secondary font-bold tracking-wider text-sm">تاريخ عريق</h2>
                 <h3 className="text-4xl md:text-5xl font-black text-primary leading-tight">
@@ -223,6 +206,28 @@ export default function Home() {
                   <Button size="lg" onClick={() => window.open('https://wa.me/9647725853434')}>
                     تواصل معنا الآن
                   </Button>
+                </div>
+              </motion.div>
+
+              {/* Image — second in DOM so mobile shows text first */}
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="order-last lg:order-first"
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl max-h-72 lg:max-h-96">
+                  <div className="absolute inset-0 border-4 border-white/20 rounded-3xl z-10 m-4 pointer-events-none" />
+                  <img 
+                    src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1000&q=80" 
+                    alt="داخل مخابز باب الآغا" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-4 start-4 end-4 glass-panel rounded-xl p-4 text-center z-20">
+                    <p className="text-lg font-black text-primary">حار ومكسب ورخيص</p>
+                    <p className="text-foreground/80 font-semibold text-sm">شعارنا الذي كبرت عليه أجيال</p>
+                  </div>
                 </div>
               </motion.div>
             </div>

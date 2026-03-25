@@ -210,7 +210,7 @@ export default function Home() {
                 </div>
 
                 <div className="pt-8">
-                  <Button size="lg" onClick={() => window.open('https://wa.me/9647830003337')}>
+                  <Button size="lg" onClick={() => window.open('https://wa.me/9647725853434')}>
                     تواصل معنا الآن
                   </Button>
                 </div>

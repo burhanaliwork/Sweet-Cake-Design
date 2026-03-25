@@ -55,7 +55,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
             className="w-full justify-center group/btn"
             onClick={() => {
               const msg = encodeURIComponent(`مرحباً، أود الطلب: ${product.name}`);
-              window.open(`https://wa.me/9647830003337?text=${msg}`, '_blank');
+              window.open(`https://wa.me/9647725853434?text=${msg}`, '_blank');
             }}
           >
             <ShoppingCart className="w-4 h-4 text-primary group-hover/btn:text-secondary transition-colors" />

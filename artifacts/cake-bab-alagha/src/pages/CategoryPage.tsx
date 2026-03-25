@@ -72,7 +72,7 @@ export default function CategoryPage() {
                 سيتم إضافة منتجات قسم {category.title} قريباً. تابعونا على مواقع التواصل الاجتماعي لمعرفة آخر الإضافات.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button onClick={() => window.open("https://wa.me/9647830003337", "_blank")}>
+                <Button onClick={() => window.open("https://wa.me/9647725853434", "_blank")}>
                   <ShoppingBag className="w-4 h-4" />
                   استفسر عبر الواتساب
                 </Button>

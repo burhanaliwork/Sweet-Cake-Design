@@ -13,11 +13,11 @@ export function Footer() {
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary/40">
+              <div className="w-14 h-14 drop-shadow-md">
                 <img 
-                  src={`${import.meta.env.BASE_URL}images/logo-real.jpg`} 
+                  src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
                   alt="شعار باب الآغا" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <h3 className="text-2xl font-black text-white">باب الآغا</h3>

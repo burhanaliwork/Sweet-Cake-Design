@@ -46,11 +46,11 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full overflow-hidden shadow-md group-hover:scale-105 transition-transform border-2 border-secondary/40">
+            <div className="w-14 h-14 group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
-                src={`${import.meta.env.BASE_URL}images/logo-real.jpg`} 
+                src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
                 alt="شعار باب الآغا" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="flex flex-col">
@@ -93,7 +93,7 @@ export function Navbar() {
             <Button 
               variant={isScrolled ? "primary" : "secondary"} 
               size="sm" 
-              onClick={() => window.open('https://wa.me/9647830003337', '_blank')}
+              onClick={() => window.open('https://wa.me/9647725853434', '_blank')}
             >
               <ShoppingBag className="w-4 h-4" />
               <span>اطلب الآن</span>
@@ -106,7 +106,7 @@ export function Navbar() {
               variant="primary" 
               size="sm" 
               className="h-10 px-4 text-sm"
-              onClick={() => window.open('https://wa.me/9647830003337', '_blank')}
+              onClick={() => window.open('https://wa.me/9647725853434', '_blank')}
             >
               طلب
             </Button>
@@ -147,7 +147,7 @@ export function Navbar() {
                 <Button 
                   variant="outline" 
                   className="w-full justify-start border-primary/20 bg-white"
-                  onClick={() => window.open('tel:+9647830003337')}
+                  onClick={() => window.open('tel:+9647725853434')}
                 >
                   <Phone className="w-5 h-5 ms-2 text-primary" />
                   <span dir="ltr">+964 783 000 3337</span>

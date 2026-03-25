@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { Menu, X, Phone, ShoppingBag } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location, navigate] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,22 +18,39 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "الرئيسية", href: "#hero" },
-    { name: "أقسامنا", href: "#categories" },
-    { name: "من نحن", href: "#about" },
-    { name: "تواصل معنا", href: "#contact" },
-  ];
-
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - 80;
+    const el = document.getElementById(sectionId);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
+
+  const handleNavClick = (action: string, sectionId?: string) => {
+    setIsMobileMenuOpen(false);
+
+    if (action === "home") {
+      navigate("/");
+    } else if (action === "section" && sectionId) {
+      if (location === "/") {
+        scrollToSection(sectionId);
+      } else {
+        // Store section to scroll after navigating home
+        sessionStorage.setItem("scrollToSection", sectionId);
+        navigate("/");
+      }
+    } else if (action === "whatsapp") {
+      window.open("https://wa.me/9647725853434", "_blank");
+    }
+  };
+
+  const navLinks = [
+    { name: "الرئيسية",   action: "home" },
+    { name: "أقسامنا",    action: "section", sectionId: "categories" },
+    { name: "من نحن",     action: "section", sectionId: "about" },
+    { name: "تواصل معنا", action: "whatsapp" },
+  ];
 
   return (
     <header
@@ -46,7 +64,7 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-20 h-20 group-hover:scale-105 transition-transform drop-shadow-md">
+            <div className="w-24 h-24 group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
                 src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
                 alt="شعار باب الآغا" 
@@ -62,7 +80,7 @@ export function Navbar() {
               </span>
               <span className={cn(
                 "text-xs font-semibold tracking-wider transition-colors",
-                isScrolled ? "text-secondary" : "text-secondary md:text-secondary md:drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                isScrolled ? "text-secondary" : "text-secondary md:drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
               )}>
                 منذ 1948
               </span>
@@ -74,18 +92,17 @@ export function Navbar() {
             <ul className="flex items-center gap-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => scrollToSection(e, link.href)}
+                  <button
+                    onClick={() => handleNavClick(link.action, link.sectionId)}
                     className={cn(
-                      "text-base font-bold transition-all hover:-translate-y-0.5 inline-block",
+                      "text-base font-bold transition-all hover:-translate-y-0.5 inline-block cursor-pointer",
                       isScrolled 
                         ? "text-foreground hover:text-secondary" 
                         : "text-primary hover:text-secondary drop-shadow-sm md:text-white md:hover:text-secondary md:drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
                     )}
                   >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -134,25 +151,14 @@ export function Navbar() {
           >
             <nav className="flex flex-col p-4 gap-2">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className="px-4 py-3 text-lg font-bold text-foreground hover:bg-primary/5 hover:text-primary rounded-xl transition-colors"
+                  onClick={() => handleNavClick(link.action, link.sectionId)}
+                  className="px-4 py-3 text-lg font-bold text-foreground hover:bg-primary/5 hover:text-primary rounded-xl transition-colors text-right w-full"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
-              <div className="mt-2 pt-4 border-t border-border flex flex-col gap-3">
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start border-primary/20 bg-white"
-                  onClick={() => window.open('tel:+9647725853434')}
-                >
-                  <Phone className="w-5 h-5 ms-2 text-primary" />
-                  <span dir="ltr">+964 783 000 3337</span>
-                </Button>
-              </div>
             </nav>
           </motion.div>
         )}

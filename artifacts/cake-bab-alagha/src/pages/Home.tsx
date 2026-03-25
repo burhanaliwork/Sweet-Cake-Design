@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
@@ -15,6 +16,15 @@ export default function Home() {
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
+
+  // After navigating from another page, scroll to stored section
+  useEffect(() => {
+    const section = sessionStorage.getItem("scrollToSection");
+    if (section) {
+      sessionStorage.removeItem("scrollToSection");
+      setTimeout(() => scrollToSection(section), 200);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col w-full bg-background overflow-x-hidden">
@@ -58,7 +68,7 @@ export default function Home() {
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" onClick={() => scrollToSection('categories')}>
-                    تصفح المنيو
+                    تصفح المنتجات
                   </Button>
                   <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white" onClick={() => scrollToSection('about')}>
                     تعرف على قصتنا

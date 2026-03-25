@@ -1,19 +1,17 @@
-import { Facebook, Instagram, MapPin, Phone, Mail } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Facebook, Instagram, MapPin, Phone } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="bg-foreground text-white pt-16 pb-8 bg-pattern relative overflow-hidden" id="contact">
-      {/* Dark overlay for pattern */}
       <div className="absolute inset-0 bg-foreground/95 z-0" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-14 h-14 drop-shadow-md">
+              <div className="w-20 h-20 drop-shadow-md">
                 <img 
                   src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
                   alt="شعار باب الآغا" 
@@ -27,21 +25,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-bold text-secondary mb-6">روابط سريعة</h4>
-            <ul className="space-y-3">
-              {['الرئيسية', 'كيك المناسبات', 'المعجنات', 'الحلويات العربية', 'من نحن'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-white/70 hover:text-secondary transition-colors flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary/50 block" />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-bold text-secondary mb-6">تواصل معنا</h4>
@@ -52,11 +35,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-white/70">
                 <Phone className="w-5 h-5 text-secondary shrink-0" />
-                <span dir="ltr">+964 783 000 3337</span>
-              </li>
-              <li className="flex items-center gap-3 text-white/70">
-                <Mail className="w-5 h-5 text-secondary shrink-0" />
-                <span>info@babalagha.com</span>
+                <span dir="ltr">07725853434</span>
               </li>
             </ul>
           </div>
@@ -74,7 +53,7 @@ export function Footer() {
             </div>
             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
               <h5 className="font-bold text-white mb-2">خدمة التوصيل</h5>
-              <p className="text-sm text-white/70">توصيل لجميع أنحاء العراق<br/>من 9 صباحاً حتى 10 مساءً</p>
+              <p className="text-sm text-white/70">توصيل لجميع أنحاء العراق</p>
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-14 h-14 group-hover:scale-105 transition-transform drop-shadow-md">
+            <div className="w-20 h-20 group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
                 src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
                 alt="شعار باب الآغا" 

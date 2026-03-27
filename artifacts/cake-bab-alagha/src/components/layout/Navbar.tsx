@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -65,7 +65,7 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-24 h-24 group-hover:scale-105 transition-transform drop-shadow-md">
+            <div className="w-32 h-32 group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
                 src={`${import.meta.env.BASE_URL}images/logo-mosul.png`} 
                 alt="شعار باب الآغا" 
@@ -73,17 +73,8 @@ export function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className={cn(
-                "font-black text-xl leading-none tracking-tight transition-colors",
-                isScrolled ? "text-primary" : "text-primary drop-shadow-md md:text-white md:drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
-              )}>
-                باب الآغا
-              </span>
-              <span className={cn(
-                "text-xs font-semibold tracking-wider transition-colors",
-                isScrolled ? "text-secondary" : "text-secondary md:drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-              )}>
-                منذ 1948
+              <span className="font-black text-lg leading-snug tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] max-w-[160px]">
+                مركز الموصل لمنتجات مخابز باب الآغا
               </span>
             </div>
           </Link>
@@ -182,6 +173,15 @@ export function Navbar() {
                   {link.name}
                 </button>
               ))}
+              <div className="border-t border-border/50 mt-1 pt-2">
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); navigate("/admin"); }}
+                  className="flex items-center gap-3 w-full px-4 py-3 text-lg font-bold text-foreground hover:bg-primary/5 hover:text-primary rounded-xl transition-colors text-right"
+                >
+                  <LogIn className="w-5 h-5 text-secondary" />
+                  <span>تسجيل دخول</span>
+                </button>
+              </div>
             </nav>
           </motion.div>
         )}

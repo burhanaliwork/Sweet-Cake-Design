@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Button } from "@/components/ui/Button";
 import { catalogData } from "@/data/products";
-import { Star, Clock, Truck, ShieldCheck, Heart, ChevronLeft } from "lucide-react";
+import { Clock, Truck, ShieldCheck, Heart, ChevronLeft } from "lucide-react";
 
 export default function Home() {
   const scrollToSection = (id: string) => {
@@ -142,23 +142,12 @@ export default function Home() {
                 >
                   <Link href={`/category/${category.id}`}>
                     <div className="group relative bg-card border border-border rounded-2xl p-5 text-center cursor-pointer hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 active:scale-95 h-full flex flex-col items-center justify-center gap-3 min-h-[140px]">
-                      {/* Count badge */}
-                      {category.products.length > 0 && (
-                        <span className="absolute top-3 start-3 bg-secondary text-primary text-xs font-black px-2 py-0.5 rounded-full">
-                          {category.products.length}
-                        </span>
-                      )}
-
                       <span className="text-4xl md:text-5xl">{category.emoji}</span>
                       <h3 className="font-black text-foreground text-base md:text-lg leading-tight group-hover:text-primary transition-colors">
                         {category.title}
                       </h3>
 
                       <div className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-secondary transition-colors font-medium">
-                        {category.products.length > 0
-                          ? <><Star className="w-3 h-3 fill-current" />{category.products.length} منتج</>
-                          : <span>قريباً</span>
-                        }
                         <ChevronLeft className="w-3 h-3" />
                       </div>
                     </div>

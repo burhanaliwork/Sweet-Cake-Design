@@ -1,6 +1,6 @@
 import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, ShoppingBag, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
@@ -52,9 +52,6 @@ export default function CategoryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {category.products.length > 0 ? (
             <>
-              <p className="text-muted-foreground font-medium mb-8">
-                {category.products.length} منتج
-              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {category.products.map((product, i) => (
                   <ProductCard key={product.id} product={product} index={i} categoryTitle={category.title} />
@@ -69,20 +66,6 @@ export default function CategoryPage() {
             >
               <div className="text-7xl mb-6">{category.emoji}</div>
               <h2 className="text-2xl font-black text-foreground mb-3">قريباً...</h2>
-              <p className="text-muted-foreground mb-8 max-w-sm">
-                سيتم إضافة منتجات قسم {category.title} قريباً. تابعونا على مواقع التواصل الاجتماعي لمعرفة آخر الإضافات.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button onClick={() => window.open("https://wa.me/9647725853434", "_blank")}>
-                  <ShoppingBag className="w-4 h-4" />
-                  استفسر عبر الواتساب
-                </Button>
-                <Link href="/">
-                  <Button variant="outline" className="w-full sm:w-auto">
-                    العودة للرئيسية
-                  </Button>
-                </Link>
-              </div>
             </motion.div>
           )}
         </div>

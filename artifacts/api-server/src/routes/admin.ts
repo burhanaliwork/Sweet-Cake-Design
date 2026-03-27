@@ -120,8 +120,8 @@ router.delete("/admin/categories/:id", authMiddleware, async (req, res) => {
 router.get("/admin/products", authMiddleware, async (req, res) => {
   const { category_id } = req.query;
   const sql = category_id
-    ? "SELECT id, category_id, name, description, price, note, sort_order, created_at, (CASE WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products WHERE category_id=$1 ORDER BY sort_order, created_at"
-    : "SELECT id, category_id, name, description, price, note, sort_order, created_at, (CASE WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products ORDER BY category_id, sort_order, created_at";
+    ? "SELECT id, category_id, name, description, price, note, sort_order, created_at, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products WHERE category_id=$1 ORDER BY sort_order, created_at"
+    : "SELECT id, category_id, name, description, price, note, sort_order, created_at, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products ORDER BY category_id, sort_order, created_at";
   const result = await query(sql, category_id ? [category_id] : []);
   res.json(result.rows);
 });

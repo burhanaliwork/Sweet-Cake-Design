@@ -274,6 +274,12 @@ export default function CategoryProducts() {
                       alt={prod.name}
                       className="w-full h-full object-cover"
                     />
+                  ) : prod.image_data?.startsWith("https://") ? (
+                    <img
+                      src={prod.image_data}
+                      alt={prod.name}
+                      className="w-full h-full object-cover"
+                    />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-2xl">🧁</div>
                   )}

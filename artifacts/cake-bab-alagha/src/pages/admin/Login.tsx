@@ -33,6 +33,15 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen bg-[#f5f0e8] flex items-center justify-center p-4" dir="rtl">
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
+        <div className="flex justify-start mb-4">
+          <a
+            href="/"
+            className="flex items-center gap-1 text-sm text-[#8c7355] hover:text-[#5c3d1e] transition-colors"
+          >
+            <span>→</span>
+            <span>رجوع للمتجر</span>
+          </a>
+        </div>
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🧁</div>
           <h1 className="text-2xl font-bold text-[#5c3d1e]">لوحة تحكم</h1>

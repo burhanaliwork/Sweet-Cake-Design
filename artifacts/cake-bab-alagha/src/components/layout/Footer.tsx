@@ -11,14 +11,13 @@ export function Footer() {
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-20 h-20 drop-shadow-md">
+              <div className="w-36 h-36 drop-shadow-md">
                 <img 
                   src={`${import.meta.env.BASE_URL}images/logo-mosul.png`} 
                   alt="شعار باب الآغا" 
                   className="w-full h-full object-contain"
                 />
               </div>
-              <h3 className="text-2xl font-black text-white">باب الآغا</h3>
             </div>
             <p className="text-white/70 leading-relaxed max-w-xs">
               للماضي حكاية وطعم ... خبز وحلويات باب الآغا ... حار ومكسب ورخيص. نقدم أصالة الطعم العراقي منذ 1948.

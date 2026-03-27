@@ -56,7 +56,7 @@ export default function AdminLogin() {
               onChange={e => setEmail(e.target.value)}
               required
               className="w-full border border-[#d4b896] rounded-lg px-4 py-3 text-right focus:outline-none focus:border-[#c17f2a] bg-[#faf8f4]"
-              placeholder="admin@babalagha.iq"
+              placeholder=""
               dir="ltr"
             />
           </div>

@@ -8,7 +8,7 @@ import type { Request, Response, NextFunction } from "express";
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "babalagha_admin_secret_2024";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@babalagha.iq";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "BabAlagha@2024";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "paris@babalagha";
 
 const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },

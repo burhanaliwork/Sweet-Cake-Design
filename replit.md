@@ -2,7 +2,34 @@
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+pnpm workspace monorepo. Contains the official online store for **مخابز باب الآغا / Bab Alagha Bakery** (est. 1948, Mosul/Baghdad) plus a shared Express API server.
+
+## Main Project: Bab Alagha Bakery Store
+
+### Frontend: `artifacts/cake-bab-alagha`
+- React + Vite + Tailwind — fully Arabic RTL, mobile-first
+- Brand colors: warm brown `hsl(25 60% 30%)`, gold `hsl(38 85% 55%)`
+- Shopping cart (CartContext + CartDrawer) with WhatsApp ordering (07725853434)
+- Delivery zones: Mosul left 2,500 د.ع / right 3,000 د.ع
+- Logo: `public/images/logo-mosul.png` (Mosul emblem, background removed)
+- Product data: `src/data/products.ts` (static fallback with categories + products)
+
+### Admin Panel (`/admin`)
+- Login: `/admin` → email: `admin@babalagha.iq`, password: `BabAlagha@2024`
+- Dashboard: `/admin/dashboard` — list all categories
+- Products: `/admin/category/:id` — add/edit/delete products per category
+- Image upload: supported (stored as base64 in DB)
+- JWT auth stored in localStorage
+
+### API Server: `artifacts/api-server`
+- Express 5 + PostgreSQL (raw pg, not Drizzle)
+- All admin routes: `src/routes/admin.ts` mounted at `/api/admin/*`
+- DB tables: `admin_users`, `categories`, `products`
+- Public routes: `GET /api/product-image/:id`, `GET /api/catalog`
+- JWT secret env var: `JWT_SECRET` (fallback: hardcoded dev secret)
+
+### WhatsApp Order Flow
+Cart items → formatted Arabic message → wa.me/9647725853434
 
 ## Stack
 

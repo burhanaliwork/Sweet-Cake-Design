@@ -8,6 +8,9 @@ import { CartDrawer } from "@/components/CartDrawer";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import CategoryPage from "@/pages/CategoryPage";
+import AdminLogin from "@/pages/admin/Login";
+import AdminDashboard from "@/pages/admin/Dashboard";
+import CategoryProducts from "@/pages/admin/CategoryProducts";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +19,9 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/category/:id" component={CategoryPage} />
+      <Route path="/admin" component={AdminLogin} />
+      <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin/category/:categoryId" component={CategoryProducts} />
       <Route component={NotFound} />
     </Switch>
   );

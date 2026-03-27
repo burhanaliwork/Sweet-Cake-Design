@@ -13,7 +13,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-20 h-20 drop-shadow-md">
                 <img 
-                  src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
+                  src={`${import.meta.env.BASE_URL}images/logo-mosul.png`} 
                   alt="شعار باب الآغا" 
                   className="w-full h-full object-contain"
                 />
@@ -53,7 +53,7 @@ export function Footer() {
             </div>
             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
               <h5 className="font-bold text-white mb-2">خدمة التوصيل</h5>
-              <p className="text-sm text-white/70">توصيل لجميع أنحاء العراق</p>
+              <p className="text-sm text-white/70">توصيل لجميع أنحاء الموصل</p>
             </div>
           </div>
         </div>

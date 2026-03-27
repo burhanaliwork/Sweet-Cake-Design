@@ -56,7 +56,7 @@ export default function CategoryPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {category.products.map((product, i) => (
-                  <ProductCard key={product.id} product={product} index={i} />
+                  <ProductCard key={product.id} product={product} index={i} categoryTitle={category.title} />
                 ))}
               </div>
             </>

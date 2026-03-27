@@ -96,7 +96,7 @@ export default function Home() {
               {[
                 { icon: Clock, title: "منذ 1948", desc: "خبرة وأصالة" },
                 { icon: Heart, title: "825K+ متابع", desc: "ثقة عملائنا" },
-                { icon: Truck, title: "توصيل سريع", desc: "لكافة أنحاء العراق" },
+                { icon: Truck, title: "توصيل سريع", desc: "لجميع أنحاء الموصل" },
                 { icon: ShieldCheck, title: "جودة عالية", desc: "مكونات طبيعية 100%" },
               ].map((stat, i) => (
                 <motion.div 

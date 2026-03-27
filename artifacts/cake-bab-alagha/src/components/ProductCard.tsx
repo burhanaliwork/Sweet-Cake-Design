@@ -2,13 +2,17 @@ import { motion } from "framer-motion";
 import { Product } from "@/data/products";
 import { Button } from "@/components/ui/Button";
 import { ShoppingCart, Wheat } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
   index: number;
+  categoryTitle: string;
 }
 
-export function ProductCard({ product, index }: ProductCardProps) {
+export function ProductCard({ product, index, categoryTitle }: ProductCardProps) {
+  const { addItem } = useCart();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -53,13 +57,10 @@ export function ProductCard({ product, index }: ProductCardProps) {
           <Button 
             variant="outline" 
             className="w-full justify-center group/btn"
-            onClick={() => {
-              const msg = encodeURIComponent(`مرحباً، أود الطلب: ${product.name}`);
-              window.open(`https://wa.me/9647725853434?text=${msg}`, '_blank');
-            }}
+            onClick={() => addItem(product, categoryTitle)}
           >
             <ShoppingCart className="w-4 h-4 text-primary group-hover/btn:text-secondary transition-colors" />
-            <span>اطلب الآن</span>
+            <span>أضف إلى السلة</span>
           </Button>
         </div>
       </div>

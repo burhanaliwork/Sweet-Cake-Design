@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, navigate] = useLocation();
+  const { totalItems, openCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +67,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-24 h-24 group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
-                src={`${import.meta.env.BASE_URL}images/logo-clean.png`} 
+                src={`${import.meta.env.BASE_URL}images/logo-mosul.png`} 
                 alt="شعار باب الآغا" 
                 className="w-full h-full object-contain"
               />
@@ -106,6 +108,21 @@ export function Navbar() {
               ))}
             </ul>
             <div className="h-6 w-px bg-current opacity-20"></div>
+            {/* Cart icon desktop */}
+            <button
+              onClick={openCart}
+              className={cn(
+                "relative p-2 rounded-xl transition-colors",
+                isScrolled ? "text-foreground hover:bg-black/5" : "text-white hover:bg-white/10"
+              )}
+            >
+              <ShoppingCart className="w-6 h-6" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -start-1 bg-secondary text-primary text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <Button 
               variant={isScrolled ? "primary" : "secondary"} 
               size="sm" 
@@ -117,15 +134,22 @@ export function Navbar() {
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center gap-4">
-            <Button 
-              variant="primary" 
-              size="sm" 
-              className="h-10 px-4 text-sm"
-              onClick={() => window.open('https://wa.me/9647725853434', '_blank')}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Cart button mobile */}
+            <button
+              onClick={openCart}
+              className={cn(
+                "relative p-2 rounded-xl transition-colors",
+                isScrolled ? "text-foreground bg-black/5" : "text-primary bg-white/80 backdrop-blur-sm"
+              )}
             >
-              طلب
-            </Button>
+              <ShoppingCart className="w-6 h-6" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -start-1 bg-secondary text-primary text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={cn(

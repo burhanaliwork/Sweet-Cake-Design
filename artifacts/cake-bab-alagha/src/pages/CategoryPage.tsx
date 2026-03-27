@@ -2,7 +2,6 @@ import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/Button";
@@ -71,7 +70,6 @@ export default function CategoryPage() {
         </div>
       </main>
 
-      <Footer />
       <FloatingWhatsApp />
     </div>
   );

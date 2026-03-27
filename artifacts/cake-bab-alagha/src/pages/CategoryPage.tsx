@@ -5,12 +5,13 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { ProductCard } from "@/components/ProductCard";
-import { catalogData } from "@/data/products";
 import { Button } from "@/components/ui/Button";
+import { useCatalog } from "@/hooks/useCatalog";
 
 export default function CategoryPage() {
   const { id } = useParams<{ id: string }>();
-  const category = catalogData.find((c) => c.id === id);
+  const { catalog } = useCatalog();
+  const category = catalog.find((c) => c.id === id);
 
   if (!category) {
     return (

@@ -20,8 +20,8 @@ export default function AdminLogin() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "خطأ في تسجيل الدخول");
-      localStorage.setItem("admin_token", data.token);
-      localStorage.setItem("admin_email", data.email);
+      sessionStorage.setItem("admin_token", data.token);
+      sessionStorage.setItem("admin_email", data.email);
       setLocation("/admin/dashboard");
     } catch (err: any) {
       setError(err.message);

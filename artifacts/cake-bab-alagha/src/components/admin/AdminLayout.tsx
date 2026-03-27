@@ -10,12 +10,12 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const [, setLocation] = useLocation();
 
   function logout() {
-    localStorage.removeItem("admin_token");
-    localStorage.removeItem("admin_email");
+    sessionStorage.removeItem("admin_token");
+    sessionStorage.removeItem("admin_email");
     setLocation("/admin");
   }
 
-  const email = localStorage.getItem("admin_email") || "";
+  const email = sessionStorage.getItem("admin_email") || "";
 
   return (
     <div className="min-h-screen bg-[#f5f0e8]" dir="rtl">

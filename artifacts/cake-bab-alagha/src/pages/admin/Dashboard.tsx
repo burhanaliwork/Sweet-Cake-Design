@@ -11,7 +11,7 @@ interface DbCategory {
   sort_order: number;
 }
 
-const token = () => localStorage.getItem("admin_token") || "";
+const token = () => sessionStorage.getItem("admin_token") || "";
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
@@ -127,13 +127,12 @@ export default function AdminDashboard() {
 
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <h2 className="font-bold text-[#5c3d1e] mb-3 text-base">الرابط المباشر للمتجر</h2>
-          <a
-            href="/"
-            target="_blank"
-            className="block text-center bg-[#5c3d1e] text-white py-3 rounded-xl font-bold hover:bg-[#7a5228] transition-colors"
+          <button
+            onClick={() => setLocation("/")}
+            className="block w-full text-center bg-[#5c3d1e] text-white py-3 rounded-xl font-bold hover:bg-[#7a5228] transition-colors"
           >
             🛍️ عرض المتجر
-          </a>
+          </button>
         </div>
       </div>
     </AdminLayout>

@@ -191,7 +191,7 @@ router.get("/catalog", async (_req, res) => {
   try {
     const cats = await query("SELECT * FROM categories ORDER BY sort_order, title");
     const prods = await query(
-      "SELECT id, category_id, name, description, price, note, (CASE WHEN image_data != '' AND image_data IS NOT NULL THEN '/api/product-image/' || id ELSE '' END) as image FROM products ORDER BY sort_order, created_at"
+      "SELECT id, category_id, name, description, price, note, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '/api/product-image/' || id ELSE '' END) as image FROM products ORDER BY sort_order, created_at"
     );
     const catalog = cats.rows.map((c: Record<string, unknown>) => ({
       ...c,

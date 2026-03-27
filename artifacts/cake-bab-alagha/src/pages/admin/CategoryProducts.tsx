@@ -19,7 +19,7 @@ interface Category {
   emoji: string;
 }
 
-const token = () => localStorage.getItem("admin_token") || "";
+const token = () => sessionStorage.getItem("admin_token") || "";
 
 function ProductForm({
   categoryId,

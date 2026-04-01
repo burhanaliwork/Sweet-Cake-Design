@@ -33,59 +33,12 @@ export default function Home() {
       <main className="flex-grow">
         {/* HERO SECTION */}
         {/* landing page hero bakery interior */}
-        <section 
-          id="hero"
-          className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-40 md:pt-28"
-        >
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0 bg-[#111c14] flex items-center justify-center">
-            <img 
-              src="/images/hero-products.jpg" 
-              alt="مخابز باب الآغا" 
-              className="w-full h-auto max-h-full object-contain"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#111c14]/90 via-[#111c14]/55 to-[#111c14]/20" />
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div className="max-w-2xl text-white">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 border border-secondary/50 text-secondary font-bold text-sm mb-6 backdrop-blur-sm">
-                  مخبوزات وحلويات عراقية أصلية
-                </span>
-                <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 drop-shadow-lg">
-                  حكاية طعم <br/>
-                  <span className="text-secondary">تتوارثها الأجيال</span>
-                </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed font-medium max-w-lg drop-shadow">
-                  للماضي حكاية وطعم ... خبز وحلويات باب الآغا ... حار ومكسب ورخيص. نقدم لكم أجود المنتجات منذ عام 1948 في قلب بغداد.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" onClick={() => scrollToSection('categories')}>
-                    تصفح المنتجات
-                  </Button>
-                  <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white" onClick={() => scrollToSection('about-text')}>
-                    تعرف على قصتنا
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-          
-          {/* Decorative scroll indicator */}
-          <motion.div 
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 hidden md:flex flex-col items-center gap-2"
-          >
-            <span className="text-xs font-bold tracking-widest uppercase">اكتشف المزيد</span>
-            <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent" />
-          </motion.div>
+        <section id="hero" className="w-full bg-[#111c14] pt-20 md:pt-24">
+          <img
+            src="/images/hero-products.jpg"
+            alt="مخابز باب الآغا"
+            className="w-full h-auto block"
+          />
         </section>
 
         {/* STATS / FEATURES SECTION */}

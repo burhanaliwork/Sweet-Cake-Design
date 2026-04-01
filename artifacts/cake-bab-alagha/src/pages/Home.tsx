@@ -38,14 +38,13 @@ export default function Home() {
           className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-40 md:pt-28"
         >
           {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 bg-[#111c14] flex items-center justify-center">
             <img 
               src="/images/hero-products.jpg" 
               alt="مخابز باب الآغا" 
-              className="w-full h-full object-cover object-center"
+              className="w-full h-auto max-h-full object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-foreground/85 via-foreground/60 to-foreground/30" />
-            <div className="absolute inset-0 bg-black/15" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111c14]/90 via-[#111c14]/55 to-[#111c14]/20" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">

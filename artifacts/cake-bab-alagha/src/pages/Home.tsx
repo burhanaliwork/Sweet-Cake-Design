@@ -33,7 +33,7 @@ export default function Home() {
       <main className="flex-grow">
         {/* HERO SECTION */}
         {/* landing page hero bakery interior */}
-        <section id="hero" className="w-full bg-[#111c14] pt-20 md:pt-24">
+        <section id="hero" className="w-full bg-[#111c14] pt-36 md:pt-36">
           <img
             src="/images/hero-products.jpg"
             alt="مخابز باب الآغا"

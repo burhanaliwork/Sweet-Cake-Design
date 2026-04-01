@@ -56,8 +56,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-300",
-        isScrolled ? "glass-panel py-3" : "bg-transparent py-5"
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-[#5c3d1e] shadow-lg",
+        isScrolled ? "py-1" : "py-2"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,12 +86,7 @@ export function Navbar() {
                 <li key={link.name}>
                   <button
                     onClick={() => handleNavClick(link.action, link.sectionId)}
-                    className={cn(
-                      "text-base font-bold transition-all hover:-translate-y-0.5 inline-block cursor-pointer",
-                      isScrolled 
-                        ? "text-foreground hover:text-secondary" 
-                        : "text-primary hover:text-secondary drop-shadow-sm md:text-white md:hover:text-secondary md:drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
-                    )}
+                    className="text-base font-bold transition-all hover:-translate-y-0.5 inline-block cursor-pointer text-white hover:text-secondary"
                   >
                     {link.name}
                   </button>
@@ -102,10 +97,7 @@ export function Navbar() {
             {/* Cart icon desktop */}
             <button
               onClick={openCart}
-              className={cn(
-                "relative p-2 rounded-xl transition-colors",
-                isScrolled ? "text-foreground hover:bg-black/5" : "text-white hover:bg-white/10"
-              )}
+              className="relative p-2 rounded-xl transition-colors text-white hover:bg-white/10"
             >
               <ShoppingCart className="w-6 h-6" />
               {totalItems > 0 && (
@@ -115,7 +107,7 @@ export function Navbar() {
               )}
             </button>
             <Button 
-              variant={isScrolled ? "primary" : "secondary"} 
+              variant="secondary" 
               size="sm" 
               onClick={() => window.open('https://wa.me/9647725853434', '_blank')}
             >
@@ -129,10 +121,7 @@ export function Navbar() {
             {/* Cart button mobile */}
             <button
               onClick={openCart}
-              className={cn(
-                "relative p-2 rounded-xl transition-colors",
-                isScrolled ? "text-foreground bg-black/5" : "text-primary bg-white/80 backdrop-blur-sm"
-              )}
+              className="relative p-2 rounded-xl transition-colors text-white hover:bg-white/10"
             >
               <ShoppingCart className="w-6 h-6" />
               {totalItems > 0 && (
@@ -143,10 +132,7 @@ export function Navbar() {
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                "p-2 rounded-xl transition-colors",
-                isScrolled ? "text-foreground bg-black/5" : "text-primary bg-white/80 backdrop-blur-sm"
-              )}
+              className="p-2 rounded-xl transition-colors text-white hover:bg-white/10"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

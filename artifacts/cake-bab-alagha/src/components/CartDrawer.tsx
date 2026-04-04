@@ -9,9 +9,16 @@ const DELIVERY_OPTIONS = [
   { id: "right", label: "الجانب الأيمن",  price: 3000, display: "3,000 د.ع" },
 ];
 
-function parsePrice(price?: string): number {
+function parsePrice(price?: string | null): number {
   if (!price) return 0;
-  return parseInt(price.replace(/[^\d]/g, ""), 10) || 0;
+  const normalized = price
+    .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+    .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0));
+  return parseInt(normalized.replace(/[^\d]/g, ""), 10) || 0;
+}
+
+function fmt(n: number): string {
+  return n.toLocaleString("en-US");
 }
 
 export function CartDrawer() {
@@ -27,13 +34,19 @@ export function CartDrawer() {
 
     let msg = "مرحباً 👋 أود الطلب التالي:\n\n";
     items.forEach((item, idx) => {
-      const lineTotal = parsePrice(item.product.price) * item.quantity;
+      const unitPrice = parsePrice(item.product.price);
+      const lineTotal = unitPrice * item.quantity;
       msg += `${idx + 1}. ${item.product.name}`;
-      if (item.product.price) msg += ` × ${item.quantity} = ${lineTotal.toLocaleString("ar-IQ")} د.ع`;
+      if (unitPrice > 0) {
+        msg += ` × ${item.quantity} = ${fmt(lineTotal)} د.ع`;
+      } else {
+        msg += ` × ${item.quantity}`;
+      }
       msg += "\n";
     });
-    msg += `\n📦 التوصيل: ${selectedDelivery.label} - ${selectedDelivery.display}`;
-    msg += `\n💰 المجموع الكلي: ${total.toLocaleString("ar-IQ")} د.ع`;
+    msg += `\n📦 التوصيل (${selectedDelivery.label}): ${fmt(selectedDelivery.price)} د.ع`;
+    msg += `\n━━━━━━━━━━━━━━━━━━`;
+    msg += `\n💰 المجموع الكلي: ${fmt(total)} د.ع`;
 
     window.open(`https://wa.me/9647725853434?text=${encodeURIComponent(msg)}`, "_blank");
   };
@@ -165,15 +178,15 @@ export function CartDrawer() {
                 <div className="space-y-1.5 text-sm">
                   <div className="flex justify-between text-muted-foreground">
                     <span>المجموع الفرعي</span>
-                    <span className="font-bold">{subtotal.toLocaleString("ar-IQ")} د.ع</span>
+                    <span className="font-bold">{fmt(subtotal)} د.ع</span>
                   </div>
                   <div className="flex justify-between text-muted-foreground">
                     <span>التوصيل ({selectedDelivery.label})</span>
-                    <span className="font-bold">{selectedDelivery.display}</span>
+                    <span className="font-bold">{fmt(selectedDelivery.price)} د.ع</span>
                   </div>
                   <div className="flex justify-between text-foreground font-black text-base border-t border-border pt-1.5 mt-1.5">
                     <span>المجموع الكلي</span>
-                    <span className="text-secondary">{total.toLocaleString("ar-IQ")} د.ع</span>
+                    <span className="text-secondary">{fmt(total)} د.ع</span>
                   </div>
                 </div>
                 <Button

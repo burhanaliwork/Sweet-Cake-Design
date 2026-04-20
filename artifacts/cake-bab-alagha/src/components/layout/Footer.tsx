@@ -33,7 +33,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://www.facebook.com/mosul.babalagha"
+                href="https://www.facebook.com/profile.php?id=61579179376700"
                 target="_blank"
                 rel="noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-foreground transition-all"

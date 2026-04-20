@@ -1,13 +1,7 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Trash2, Plus, Minus, ShoppingBag, Truck } from "lucide-react";
+import { X, Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
-
-const DELIVERY_OPTIONS = [
-  { id: "left",  label: "الجانب الأيسر",  price: 2500, display: "2,500 د.ع" },
-  { id: "right", label: "الجانب الأيمن",  price: 3000, display: "3,000 د.ع" },
-];
 
 function parsePrice(price?: string | null): number {
   if (!price) return 0;
@@ -23,11 +17,8 @@ function fmt(n: number): string {
 
 export function CartDrawer() {
   const { items, removeItem, updateQuantity, clearCart, isOpen, closeCart } = useCart();
-  const [delivery, setDelivery] = useState<string>("left");
 
-  const selectedDelivery = DELIVERY_OPTIONS.find(o => o.id === delivery)!;
   const subtotal = items.reduce((sum, i) => sum + parsePrice(i.product.price) * i.quantity, 0);
-  const total = subtotal + selectedDelivery.price;
 
   const handleCheckout = () => {
     if (items.length === 0) return;
@@ -44,9 +35,10 @@ export function CartDrawer() {
       }
       msg += "\n";
     });
-    msg += `\n📦 التوصيل (${selectedDelivery.label}): ${fmt(selectedDelivery.price)} د.ع`;
-    msg += `\n━━━━━━━━━━━━━━━━━━`;
-    msg += `\n💰 المجموع الكلي: ${fmt(total)} د.ع`;
+    if (subtotal > 0) {
+      msg += `\n💰 مجموع المنتجات: ${fmt(subtotal)} د.ع`;
+    }
+    msg += `\n\nيرجى انتظار رد الموظف لتثبيت الطلب ومعرفة السعر الإجمالي مع التوصيل.`;
 
     window.open(`https://wa.me/9647725853434?text=${encodeURIComponent(msg)}`, "_blank");
   };
@@ -137,30 +129,6 @@ export function CartDrawer() {
                     </div>
                   ))}
 
-                  {/* Delivery */}
-                  <div className="bg-card border border-border rounded-xl p-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Truck className="w-4 h-4 text-secondary" />
-                      <p className="font-bold text-sm">التوصيل - الموصل</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      {DELIVERY_OPTIONS.map(opt => (
-                        <button
-                          key={opt.id}
-                          onClick={() => setDelivery(opt.id)}
-                          className={`rounded-xl p-3 text-center border-2 transition-all ${
-                            delivery === opt.id
-                              ? "border-secondary bg-secondary/10 text-primary"
-                              : "border-border bg-muted/30 text-muted-foreground"
-                          }`}
-                        >
-                          <p className="font-black text-sm">{opt.label}</p>
-                          <p className="font-bold text-xs mt-0.5">{opt.display}</p>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
                   {/* Clear cart */}
                   <button
                     onClick={clearCart}
@@ -175,20 +143,15 @@ export function CartDrawer() {
             {/* Footer */}
             {items.length > 0 && (
               <div className="border-t border-border p-4 space-y-3 bg-card">
-                <div className="space-y-1.5 text-sm">
-                  <div className="flex justify-between text-muted-foreground">
-                    <span>المجموع الفرعي</span>
+                {subtotal > 0 && (
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>مجموع المنتجات</span>
                     <span className="font-bold">{fmt(subtotal)} د.ع</span>
                   </div>
-                  <div className="flex justify-between text-muted-foreground">
-                    <span>التوصيل ({selectedDelivery.label})</span>
-                    <span className="font-bold">{fmt(selectedDelivery.price)} د.ع</span>
-                  </div>
-                  <div className="flex justify-between text-foreground font-black text-base border-t border-border pt-1.5 mt-1.5">
-                    <span>المجموع الكلي</span>
-                    <span className="text-secondary">{fmt(total)} د.ع</span>
-                  </div>
-                </div>
+                )}
+                <p className="text-xs text-muted-foreground text-center">
+                  سيتم تحديد سعر التوصيل من قبل الموظف
+                </p>
                 <Button
                   variant="primary"
                   className="w-full justify-center text-base py-3"

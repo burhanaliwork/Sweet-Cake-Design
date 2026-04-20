@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
 
 export function Footer() {
   return (
@@ -19,17 +19,29 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Social & Delivery */}
+          {/* Social */}
           <div className="flex flex-col items-center gap-4">
             <h4 className="text-lg font-bold text-secondary">تابعنا</h4>
-            <a
-              href="https://instagram.com/babalagha.iq"
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-foreground transition-all"
-            >
-              <Instagram className="w-5 h-5" />
-            </a>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://instagram.com/babalagha_mosul"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-foreground transition-all"
+                title="انستغرام"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/mosul.babalagha"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-foreground transition-all"
+                title="فيسبوك"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
           {/* Delivery */}

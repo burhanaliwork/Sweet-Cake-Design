@@ -23,22 +23,22 @@ export function CartDrawer() {
   const handleCheckout = () => {
     if (items.length === 0) return;
 
-    let msg = "مرحباً 👋 أود الطلب التالي:\n\n";
+    let msg = "مرحباً، أود الطلب التالي:\n\n";
     items.forEach((item, idx) => {
       const unitPrice = parsePrice(item.product.price);
       const lineTotal = unitPrice * item.quantity;
       msg += `${idx + 1}. ${item.product.name}`;
       if (unitPrice > 0) {
-        msg += ` × ${item.quantity} = ${fmt(lineTotal)} د.ع`;
+        msg += ` x ${item.quantity} = ${fmt(lineTotal)} د.ع`;
       } else {
-        msg += ` × ${item.quantity}`;
+        msg += ` x ${item.quantity}`;
       }
       msg += "\n";
     });
     if (subtotal > 0) {
-      msg += `\n💰 مجموع المنتجات: ${fmt(subtotal)} د.ع`;
+      msg += `\nمجموع المنتجات: ${fmt(subtotal)} د.ع`;
     }
-    msg += `\n\nيرجى انتظار رد الموظف لتثبيت الطلب ومعرفة السعر الإجمالي مع التوصيل.`;
+    msg += `\n\nيرجى انتظار رد الموظف لتثبيت الطلب ومعرفة السعر الاجمالي مع التوصيل.`;
 
     window.open(`https://wa.me/9647725853434?text=${encodeURIComponent(msg)}`, "_blank");
   };

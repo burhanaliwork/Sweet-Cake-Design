@@ -49,7 +49,6 @@ export function Navbar() {
 
   const navLinks = [
     { name: "الرئيسية",   action: "home" },
-    { name: "من نحن",     action: "section", sectionId: "about-text" },
     { name: "تواصل معنا", action: "whatsapp" },
   ];
 

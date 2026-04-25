@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ShoppingBag, ShoppingCart, LogIn } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -158,15 +158,6 @@ export function Navbar() {
                   {link.name}
                 </button>
               ))}
-              <div className="border-t border-border/50 mt-1 pt-2">
-                <button
-                  onClick={() => { setIsMobileMenuOpen(false); navigate("/admin"); }}
-                  className="flex items-center gap-3 w-full px-4 py-3 text-lg font-bold text-foreground hover:bg-primary/5 hover:text-primary rounded-xl transition-colors text-right"
-                >
-                  <LogIn className="w-5 h-5 text-secondary" />
-                  <span>تسجيل دخول</span>
-                </button>
-              </div>
             </nav>
           </motion.div>
         )}

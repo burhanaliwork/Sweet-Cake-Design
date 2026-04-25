@@ -12,7 +12,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
   function logout() {
     sessionStorage.removeItem("admin_token");
     sessionStorage.removeItem("admin_email");
-    setLocation("/admin");
+    setLocation("/babalaghaparis");
   }
 
   const email = sessionStorage.getItem("admin_email") || "";

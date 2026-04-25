@@ -4,7 +4,16 @@ let pool: Pool | null = null;
 
 export function getPool() {
   if (!pool) {
-    pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    const dbUrl = process.env.DATABASE_URL || "";
+    const needsSsl =
+      dbUrl.includes("neon.tech") ||
+      dbUrl.includes("sslmode=require") ||
+      process.env.NODE_ENV === "production";
+
+    pool = new Pool({
+      connectionString: dbUrl,
+      ssl: needsSsl ? { rejectUnauthorized: false } : false,
+    });
   }
   return pool;
 }

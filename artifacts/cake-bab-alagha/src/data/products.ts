@@ -5,6 +5,7 @@ export interface Product {
   price?: string;
   note?: string;
   image: string;
+  is_available?: boolean;
 }
 
 export interface Category {

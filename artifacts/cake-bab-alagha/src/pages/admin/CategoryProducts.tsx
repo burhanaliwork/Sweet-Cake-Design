@@ -11,6 +11,7 @@ interface Product {
   note: string;
   image_data: string;
   sort_order: number;
+  is_available: boolean;
 }
 
 interface Category {
@@ -198,6 +199,7 @@ export default function CategoryProducts() {
   const [editingProduct, setEditingProduct] = useState<Product | undefined>(undefined);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [togglingId, setTogglingId] = useState<string | null>(null);
 
   useEffect(() => {
     const t = token();
@@ -228,6 +230,17 @@ export default function CategoryProducts() {
     });
     setDeletingId(null);
     setConfirmDeleteId(null);
+    await loadData();
+  }
+
+  async function toggleAvailability(prod: Product) {
+    setTogglingId(prod.id);
+    await fetch(`/api/admin/products/${prod.id}/availability`, {
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${token()}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ is_available: !prod.is_available }),
+    });
+    setTogglingId(null);
     await loadData();
   }
 
@@ -293,7 +306,18 @@ export default function CategoryProducts() {
                     </span>
                   )}
                 </div>
-                <div className="flex gap-2 flex-shrink-0">
+                <div className="flex gap-2 flex-shrink-0 flex-wrap justify-end">
+                  <button
+                    onClick={() => toggleAvailability(prod)}
+                    disabled={togglingId === prod.id}
+                    className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 ${
+                      prod.is_available
+                        ? "bg-green-50 text-green-700 hover:bg-green-100"
+                        : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                    }`}
+                  >
+                    {togglingId === prod.id ? "..." : prod.is_available ? "متوفر" : "غير متوفر"}
+                  </button>
                   <button
                     onClick={() => { setEditingProduct(prod); setShowForm(true); }}
                     className="bg-[#f0e8d8] text-[#5c3d1e] text-xs px-3 py-1.5 rounded-lg font-medium hover:bg-[#e8dcc8] transition-colors"

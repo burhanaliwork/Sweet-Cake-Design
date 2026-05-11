@@ -25,6 +25,7 @@ export function useCatalog() {
             price: p.price,
             note: p.note,
             image: p.image || "",
+            is_available: p.is_available !== false,
           }));
           return {
             id: dbCat.id,
@@ -49,7 +50,7 @@ export function useCatalog() {
     setLoading(true);
     fetch("/api/catalog")
       .then((r) => r.json())
-      .then((data: Array<{id: string; title: string; emoji: string; description: string; products: Array<{id: string; name: string; description?: string; price?: string; note?: string; image: string}>}>) => {
+      .then((data: Array<{id: string; title: string; emoji: string; description: string; products: Array<{id: string; name: string; description?: string; price?: string; note?: string; image: string; is_available?: boolean}>}>) => {
         if (!Array.isArray(data) || data.length === 0) return;
         const merged: Category[] = data.map((dbCat) => {
           const staticCat = catalogData.find((c) => c.id === dbCat.id);
@@ -60,6 +61,7 @@ export function useCatalog() {
             price: p.price,
             note: p.note,
             image: p.image || "",
+            is_available: p.is_available !== false,
           }));
           return {
             id: dbCat.id,

@@ -40,8 +40,14 @@ export async function initAdminDb() {
       note TEXT DEFAULT '',
       image_data TEXT DEFAULT '',
       sort_order INTEGER DEFAULT 0,
+      is_available BOOLEAN DEFAULT TRUE,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
+  `);
+
+  // Migration: add is_available column if it doesn't exist (for existing DBs)
+  await query(`
+    ALTER TABLE products ADD COLUMN IF NOT EXISTS is_available BOOLEAN DEFAULT TRUE;
   `);
 
   const existing = await query("SELECT id FROM admin_users WHERE email=$1", [ADMIN_EMAIL]);
@@ -120,8 +126,8 @@ router.delete("/admin/categories/:id", authMiddleware, async (req, res) => {
 router.get("/admin/products", authMiddleware, async (req, res) => {
   const { category_id } = req.query;
   const sql = category_id
-    ? "SELECT id, category_id, name, description, price, note, sort_order, created_at, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products WHERE category_id=$1 ORDER BY sort_order, created_at"
-    : "SELECT id, category_id, name, description, price, note, sort_order, created_at, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products ORDER BY category_id, sort_order, created_at";
+    ? "SELECT id, category_id, name, description, price, note, sort_order, is_available, created_at, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products WHERE category_id=$1 ORDER BY sort_order, created_at"
+    : "SELECT id, category_id, name, description, price, note, sort_order, is_available, created_at, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '[image]' ELSE '' END) as image_data FROM products ORDER BY category_id, sort_order, created_at";
   const result = await query(sql, category_id ? [category_id] : []);
   res.json(result.rows);
 });
@@ -135,7 +141,7 @@ router.post("/admin/products", authMiddleware, upload.single("image"), async (re
     }
     const newId = id || `p_${Date.now()}`;
     await query(
-      "INSERT INTO products (id, category_id, name, description, price, note, image_data, sort_order) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",
+      "INSERT INTO products (id, category_id, name, description, price, note, image_data, sort_order, is_available) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,TRUE)",
       [newId, category_id, name, description || "", price || "", note || "", image_data, sort_order || 0]
     );
     res.json({ ok: true, id: newId });
@@ -159,6 +165,17 @@ router.put("/admin/products/:id", authMiddleware, upload.single("image"), async 
         [name, description || "", price || "", note || "", sort_order || 0, req.params.id]
       );
     }
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: String(err) });
+  }
+});
+
+// ── Toggle availability ───────────────────────────────────────────────────────
+router.patch("/admin/products/:id/availability", authMiddleware, async (req, res) => {
+  try {
+    const { is_available } = req.body;
+    await query("UPDATE products SET is_available=$1 WHERE id=$2", [!!is_available, req.params.id]);
     res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ error: String(err) });
@@ -191,7 +208,7 @@ router.get("/catalog", async (_req, res) => {
   try {
     const cats = await query("SELECT * FROM categories ORDER BY sort_order, title");
     const prods = await query(
-      "SELECT id, category_id, name, description, price, note, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '/api/product-image/' || id ELSE '' END) as image FROM products ORDER BY sort_order, created_at"
+      "SELECT id, category_id, name, description, price, note, is_available, (CASE WHEN image_data LIKE 'https://%' THEN image_data WHEN image_data != '' AND image_data IS NOT NULL THEN '/api/product-image/' || id ELSE '' END) as image FROM products ORDER BY sort_order, created_at"
     );
     const catalog = cats.rows.map((c: Record<string, unknown>) => ({
       ...c,

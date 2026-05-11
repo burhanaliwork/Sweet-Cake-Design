@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Product } from "@/data/products";
-import { Button } from "@/components/ui/Button";
 import { ShoppingCart, Wheat, X, ZoomIn } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
@@ -23,88 +22,89 @@ export function ProductCard({ product, index, categoryTitle }: ProductCardProps)
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.05 }}
-        className={`group bg-card rounded-2xl overflow-hidden border shadow-sm transition-all duration-300 flex flex-col h-full ${
+        className={`group bg-card rounded-2xl overflow-hidden border shadow-sm transition-all duration-300 flex flex-row-reverse items-stretch ${
           isAvailable
-            ? "border-border hover:border-secondary/50 hover:shadow-xl hover:shadow-secondary/10"
+            ? "border-border hover:border-secondary/50 hover:shadow-lg"
             : "border-border/40 opacity-60 grayscale"
         }`}
+        dir="rtl"
       >
-        {/* Image — half height, clickable */}
-        <div className="relative overflow-hidden bg-muted" style={{ height: "9rem" }}>
+        {/* Image — square, right side */}
+        <div className="relative flex-shrink-0 w-24 h-24 self-center m-3 rounded-xl overflow-hidden bg-muted">
           {product.image ? (
-            <img
-              src={product.image}
-              alt={product.name}
-              className={`w-full h-full object-cover transition-transform duration-700 ${
-                isAvailable ? "group-hover:scale-110 cursor-zoom-in" : "cursor-default"
-              }`}
-              loading="lazy"
-              onClick={() => isAvailable && product.image && setLightboxOpen(true)}
-            />
+            <>
+              <img
+                src={product.image}
+                alt={product.name}
+                className={`w-full h-full object-cover transition-transform duration-500 ${
+                  isAvailable ? "group-hover:scale-110 cursor-zoom-in" : "cursor-default"
+                }`}
+                loading="lazy"
+                onClick={() => isAvailable && product.image && setLightboxOpen(true)}
+              />
+              {isAvailable && (
+                <button
+                  onClick={() => setLightboxOpen(true)}
+                  className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors"
+                >
+                  <ZoomIn className="w-4 h-4 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </button>
+              )}
+            </>
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-4xl">🧁</div>
+            <div className="w-full h-full flex items-center justify-center text-3xl">🧁</div>
           )}
 
-          {/* Zoom hint */}
-          {isAvailable && product.image && (
-            <button
-              onClick={() => setLightboxOpen(true)}
-              className="absolute top-2 end-2 bg-black/40 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-              title="عرض الصورة"
-            >
-              <ZoomIn className="w-3.5 h-3.5" />
-            </button>
+          {/* Unavailable overlay */}
+          {!isAvailable && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+              <span className="text-white text-[10px] font-bold text-center px-1">غير متوفر</span>
+            </div>
           )}
 
           {/* Note badge */}
           {product.note && (
-            <div className="absolute top-2 start-2 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
-              <Wheat className="w-3 h-3" />
+            <div className="absolute top-1 start-1 bg-green-600 text-white text-[9px] font-bold px-1 py-0.5 rounded-full flex items-center gap-0.5">
+              <Wheat className="w-2 h-2" />
               {product.note}
-            </div>
-          )}
-
-          {/* Unavailable badge */}
-          {!isAvailable && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="bg-black/60 text-white text-sm font-bold px-3 py-1 rounded-full">
-                غير متوفر
-              </span>
             </div>
           )}
         </div>
 
-        <div className="p-4 flex flex-col flex-grow">
-          <div className="flex justify-between items-center gap-2 mb-3">
-            <h3 className={`text-lg font-bold leading-tight ${isAvailable ? "text-foreground" : "text-muted-foreground"}`}>
-              {product.name}
-            </h3>
-            {product.price && (
-              <span className={`inline-block px-3 py-1 rounded-full text-sm font-black whitespace-nowrap shadow-sm ${
-                isAvailable ? "bg-secondary text-primary" : "bg-muted text-muted-foreground"
-              }`}>
-                {product.price}
-              </span>
-            )}
-          </div>
+        {/* Content — left side */}
+        <div className="flex-1 flex flex-col justify-between py-3 ps-3 pe-1 min-w-0">
+          {/* Name */}
+          <h3 className={`text-sm font-bold leading-snug text-start ${isAvailable ? "text-foreground" : "text-muted-foreground"}`}>
+            {product.name}
+          </h3>
 
+          {/* Price */}
+          {product.price && (
+            <span className={`text-sm font-black mt-1 ${isAvailable ? "text-secondary" : "text-muted-foreground"}`}>
+              {product.price}
+            </span>
+          )}
+
+          {/* Description */}
           {product.description && (
-            <p className="text-muted-foreground text-sm mb-4 flex-grow leading-relaxed">
+            <p className="text-muted-foreground text-xs mt-1 leading-relaxed line-clamp-2">
               {product.description}
             </p>
           )}
 
-          <div className="mt-auto pt-3 border-t border-border/50">
-            <Button
-              variant="outline"
-              className="w-full justify-center group/btn"
-              onClick={() => isAvailable && addItem(product, categoryTitle)}
-              disabled={!isAvailable}
-            >
-              <ShoppingCart className="w-4 h-4 text-primary group-hover/btn:text-secondary transition-colors" />
-              <span>{isAvailable ? "أضف إلى السلة" : "غير متوفر حالياً"}</span>
-            </Button>
-          </div>
+          {/* Add to cart */}
+          <button
+            onClick={() => isAvailable && addItem(product, categoryTitle)}
+            disabled={!isAvailable}
+            className={`mt-2 flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 rounded-lg border transition-colors self-start ${
+              isAvailable
+                ? "border-border text-foreground hover:border-secondary hover:text-secondary"
+                : "border-border/40 text-muted-foreground cursor-not-allowed"
+            }`}
+          >
+            <ShoppingCart className="w-3 h-3" />
+            {isAvailable ? "أضف إلى السلة" : "غير متوفر"}
+          </button>
         </div>
       </motion.div>
 

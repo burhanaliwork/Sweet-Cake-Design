@@ -96,7 +96,7 @@ export function ProductCard({ product, index, categoryTitle }: ProductCardProps)
           <button
             onClick={() => isAvailable && addItem(product, categoryTitle)}
             disabled={!isAvailable}
-            className={`mt-2 flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 rounded-lg border transition-colors self-start ${
+            className={`mt-2 flex items-center gap-1.5 text-sm font-medium px-3.5 py-2 rounded-lg border transition-colors self-start ${
               isAvailable
                 ? "border-border text-foreground hover:border-secondary hover:text-secondary"
                 : "border-border/40 text-muted-foreground cursor-not-allowed"

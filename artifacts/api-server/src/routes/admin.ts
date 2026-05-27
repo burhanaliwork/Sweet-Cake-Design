@@ -2,8 +2,17 @@ import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import multer from "multer";
+import sharp from "sharp";
 import { query } from "../lib/db";
 import type { Request, Response, NextFunction } from "express";
+
+async function compressImage(buffer: Buffer, mimetype: string): Promise<{ buffer: Buffer; mime: string }> {
+  const compressed = await sharp(buffer)
+    .resize(800, 800, { fit: "inside", withoutEnlargement: true })
+    .jpeg({ quality: 72, progressive: true })
+    .toBuffer();
+  return { buffer: compressed, mime: "image/jpeg" };
+}
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "babalagha_admin_secret_2024";
@@ -137,7 +146,8 @@ router.post("/admin/products", authMiddleware, upload.single("image"), async (re
     const { id, category_id, name, description, price, note, sort_order } = req.body;
     let image_data = "";
     if (req.file) {
-      image_data = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+      const { buffer, mime } = await compressImage(req.file.buffer, req.file.mimetype);
+      image_data = `data:${mime};base64,${buffer.toString("base64")}`;
     }
     const newId = id || `p_${Date.now()}`;
     await query(
@@ -154,7 +164,8 @@ router.put("/admin/products/:id", authMiddleware, upload.single("image"), async 
   try {
     const { name, description, price, note, sort_order } = req.body;
     if (req.file) {
-      const image_data = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+      const { buffer, mime } = await compressImage(req.file.buffer, req.file.mimetype);
+      const image_data = `data:${mime};base64,${buffer.toString("base64")}`;
       await query(
         "UPDATE products SET name=$1, description=$2, price=$3, note=$4, sort_order=$5, image_data=$6 WHERE id=$7",
         [name, description || "", price || "", note || "", sort_order || 0, image_data, req.params.id]

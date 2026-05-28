@@ -115,26 +115,26 @@ export function ProductCard({ product, index, categoryTitle }: ProductCardProps)
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] bg-black/90 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[999] bg-black flex items-center justify-center"
             onClick={() => setLightboxOpen(false)}
           >
             <button
-              className="absolute top-4 end-4 bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors"
+              className="absolute top-4 end-4 z-10 bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors"
               onClick={() => setLightboxOpen(false)}
             >
               <X className="w-6 h-6" />
             </button>
             <motion.img
-              initial={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.2 }}
               src={product.image}
               alt={product.name}
-              className="max-w-full max-h-[85vh] rounded-2xl object-contain shadow-2xl"
+              className="w-full h-[100dvh] object-contain"
               onClick={(e) => e.stopPropagation()}
             />
-            <div className="absolute bottom-6 text-white/80 text-sm font-medium">
+            <div className="absolute bottom-6 text-white/80 text-sm font-medium drop-shadow">
               {product.name}
             </div>
           </motion.div>

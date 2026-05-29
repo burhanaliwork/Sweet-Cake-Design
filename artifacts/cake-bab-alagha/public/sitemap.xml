@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- الصفحة الرئيسية -->
+  <url>
+    <loc>https://babalghamosul.com/</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- قسم بقسم وكيك -->
+  <url>
+    <loc>https://babalghamosul.com/category/baqasim-cake</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم خالي الجلوتين -->
+  <url>
+    <loc>https://babalghamosul.com/category/gluten-free</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم الحلويات -->
+  <url>
+    <loc>https://babalghamosul.com/category/halawiyat</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم المعجنات -->
+  <url>
+    <loc>https://babalghamosul.com/category/maajinaat</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم المخبوزات -->
+  <url>
+    <loc>https://babalghamosul.com/category/makhbozat</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم الموالح -->
+  <url>
+    <loc>https://babalghamosul.com/category/mawaalih</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم البيتزا -->
+  <url>
+    <loc>https://babalghamosul.com/category/pizza</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم منتجات أخرى -->
+  <url>
+    <loc>https://babalghamosul.com/category/products-other</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- قسم خالي السكر -->
+  <url>
+    <loc>https://babalghamosul.com/category/sugar-free</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- قسم الطحين -->
+  <url>
+    <loc>https://babalghamosul.com/category/taheen</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

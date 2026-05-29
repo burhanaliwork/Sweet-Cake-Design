@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Product } from "@/data/products";
-import { ShoppingCart, Wheat, X, ZoomIn } from "lucide-react";
+import { ShoppingCart, Wheat, X, ZoomIn, Ban } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
@@ -64,8 +64,15 @@ export function ProductCard({ product, index, categoryTitle }: ProductCardProps)
 
           {/* Note badge */}
           {product.note && (
-            <div className="absolute top-1 start-1 bg-green-600 text-white text-[9px] font-bold px-1 py-0.5 rounded-full flex items-center gap-0.5">
-              <Wheat className="w-2 h-2" />
+            <div className={`absolute top-1 start-1 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 ${
+              product.note === "بدون سكر"
+                ? "bg-teal-500"
+                : "bg-green-600"
+            }`}>
+              {product.note === "بدون سكر"
+                ? <Ban className="w-2 h-2" />
+                : <Wheat className="w-2 h-2" />
+              }
               {product.note}
             </div>
           )}

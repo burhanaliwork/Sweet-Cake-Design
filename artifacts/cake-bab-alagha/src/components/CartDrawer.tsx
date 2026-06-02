@@ -23,22 +23,29 @@ export function CartDrawer() {
   const handleCheckout = () => {
     if (items.length === 0) return;
 
-    let msg = "مرحباً، أود الطلب التالي:\n\n";
+    let msg = "السلام عليكم 🌹\n";
+    msg += "أود تقديم طلب من متجر مخابز باب الآغا\n\n";
+    msg += "📋 تفاصيل الطلب:\n";
+    msg += "─────────────────\n";
     items.forEach((item, idx) => {
       const unitPrice = parsePrice(item.product.price);
       const lineTotal = unitPrice * item.quantity;
       msg += `${idx + 1}. ${item.product.name}`;
       if (unitPrice > 0) {
-        msg += ` x ${item.quantity} = ${fmt(lineTotal)} د.ع`;
+        msg += ` × ${item.quantity} = ${fmt(lineTotal)} د.ع`;
       } else {
-        msg += ` x ${item.quantity}`;
+        msg += ` × ${item.quantity}`;
       }
       msg += "\n";
     });
+    msg += "─────────────────\n";
     if (subtotal > 0) {
-      msg += `\nمجموع المنتجات: ${fmt(subtotal)} د.ع`;
+      msg += `💰 مجموع المنتجات: ${fmt(subtotal)} د.ع\n`;
+      msg += "(لا يشمل سعر التوصيل)\n";
     }
-    msg += `\n\nيرجى انتظار رد الموظف لتثبيت الطلب ومعرفة السعر الاجمالي مع التوصيل.`;
+    msg += "\n⏳ يرجى تأكيد الطلب وإعلامي بالسعر الإجمالي مع التوصيل.\n\n";
+    msg += "📞 للتواصل: 07725853434\n";
+    msg += "🌐 موقعنا: babalghamosul.com";
 
     window.open(`https://wa.me/9647725853434?text=${encodeURIComponent(msg)}`, "_blank");
   };

@@ -44,8 +44,9 @@ export function CartDrawer() {
       msg += "(لا يشمل سعر التوصيل)\n";
     }
     msg += "\n⏳ يرجى تأكيد الطلب وإعلامي بالسعر الإجمالي مع التوصيل.\n\n";
-    msg += "📞 للتواصل: 07725853434\n";
-    msg += "🌐 موقعنا: babalghamosul.com";
+    msg += "─────────────────\n";
+    msg += "📞 يرجى كتابة رقم التواصل : \n\n";
+    msg += "📍 يرجى كتابة رابط الموقع ( لوكيشن ) : ";
 
     window.open(`https://wa.me/9647725853434?text=${encodeURIComponent(msg)}`, "_blank");
   };

@@ -1,0 +1,1 @@
+- [Bab Alagha product audit](babalagha-product-audit.md) — montage-based image/name mismatch audit + PUT pitfalls for babalghamosul.com store

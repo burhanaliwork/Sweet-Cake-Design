@@ -19,7 +19,7 @@ export interface Category {
 
 export const catalogData: Category[] = [
   { id: "halawiyat",      title: "حلويات",         emoji: "🍰", image: "/images/categories/halawiyat.png",  description: "تشكيلة واسعة من الحلويات اللذيذة",           products: [] },
-  { id: "baqasim-cake",   title: "بقاصم وكيك",     emoji: "🎂",                                             description: "تشكيلة من البقاصم والكيك الطازج",           products: [] },
+  { id: "baqasim-cake",   title: "بقاصم وكعك",     emoji: "🎂",                                             description: "تشكيلة من البقاصم والكعك الطازج",           products: [] },
   { id: "gluten-free",    title: "خالي الجلوتين",  emoji: "🌾", image: "/images/categories/gluten-free.png", description: "منتجات خاصة لأصحاب حساسية الجلوتين",        products: [] },
   { id: "taheen",         title: "طحين",           emoji: "🫙", image: "/images/categories/taheen.png",     description: "أجود أنواع الطحين والدقيق",                 products: [] },
   { id: "products-other", title: "منتجات",         emoji: "🛒",                                             description: "منتجات متنوعة مختارة بعناية",               products: [] },

@@ -61,13 +61,27 @@ export default function Home() {
                   transition={{ duration: 0.4, delay: i * 0.05 }}
                 >
                   <Link href={`/category/${category.id}`}>
-                    <div className="group relative bg-card border border-border rounded-2xl p-5 text-center cursor-pointer hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 active:scale-95 h-full flex flex-col items-center justify-center gap-3 min-h-[140px]">
-                      <span className="text-4xl md:text-5xl">{category.emoji}</span>
-                      <h3 className="font-black text-foreground text-base md:text-lg leading-tight group-hover:text-primary transition-colors">
-                        {category.title}
-                      </h3>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-secondary transition-colors font-medium">
-                        <ChevronLeft className="w-3 h-3" />
+                    <div className="group relative bg-card border border-border rounded-2xl overflow-hidden text-center cursor-pointer hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 active:scale-95 h-full flex flex-col items-center justify-center min-h-[160px]">
+                      {category.image ? (
+                        <div className="w-full h-28 overflow-hidden flex-shrink-0">
+                          <img
+                            src={category.image}
+                            alt={category.title}
+                            className="w-full h-full object-cover object-center scale-110 group-hover:scale-125 transition-transform duration-500"
+                          />
+                        </div>
+                      ) : (
+                        <div className="h-28 flex items-center justify-center">
+                          <span className="text-4xl md:text-5xl">{category.emoji}</span>
+                        </div>
+                      )}
+                      <div className="px-3 py-3 flex flex-col items-center gap-1">
+                        <h3 className="font-black text-foreground text-base md:text-lg leading-tight group-hover:text-primary transition-colors">
+                          {category.title}
+                        </h3>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-secondary transition-colors font-medium">
+                          <ChevronLeft className="w-3 h-3" />
+                        </div>
                       </div>
                     </div>
                   </Link>

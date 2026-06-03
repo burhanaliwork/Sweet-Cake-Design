@@ -53,7 +53,10 @@ export function Footer() {
           <p className="text-white/50 text-sm">
             مركز الموصل التسويقي لمنتجات شركة مخابز باب الآغا
           </p>
-          <p className="text-white/50 text-sm">صُنع بحب في العراق</p>
+          <div className="text-white/50 text-sm text-center">
+            <p>صُنع بحب في العراق</p>
+            <p>جميع الحقوق محفوظة</p>
+          </div>
         </div>
       </div>
     </footer>

@@ -51,7 +51,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/50 text-sm">
-            © {new Date().getFullYear()} مخابز باب الآغا. جميع الحقوق محفوظة.
+            مركز الموصل التسويقي لمنتجات شركة مخابز باب الآغا
           </p>
           <p className="text-white/50 text-sm">صُنع بحب في العراق</p>
         </div>

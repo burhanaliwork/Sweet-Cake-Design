@@ -6,7 +6,8 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { catalogData } from "@/data/products";
 import { useCatalog } from "@/hooks/useCatalog";
-import { ChevronLeft, Search, X } from "lucide-react";
+import { ChevronLeft, Search, X, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 interface SearchResult {
   productId: string;
@@ -21,9 +22,22 @@ interface SearchResult {
 
 export default function Home() {
   const { catalog } = useCatalog();
+  const { addItem } = useCart();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleAddToCart = (r: SearchResult, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem(
+      { id: r.productId, name: r.name, price: r.price, note: r.note, image: r.image, is_available: r.is_available },
+      r.categoryTitle
+    );
+    setAddedIds(prev => new Set(prev).add(r.productId));
+    setTimeout(() => setAddedIds(prev => { const s = new Set(prev); s.delete(r.productId); return s; }), 1500);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -162,6 +176,21 @@ export default function Home() {
                                 {r.price && (
                                   <span className="text-xs font-bold text-secondary whitespace-nowrap flex-shrink-0">{r.price}</span>
                                 )}
+                                <button
+                                  onClick={(e) => handleAddToCart(r, e)}
+                                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                                    addedIds.has(r.productId)
+                                      ? "bg-green-500 text-white scale-110"
+                                      : "bg-secondary/15 hover:bg-secondary text-secondary hover:text-white"
+                                  }`}
+                                  title="أضف إلى السلة"
+                                >
+                                  {addedIds.has(r.productId) ? (
+                                    <span className="text-sm font-bold leading-none">✓</span>
+                                  ) : (
+                                    <ShoppingCart className="w-4 h-4" />
+                                  )}
+                                </button>
                               </div>
                             </Link>
                           </li>

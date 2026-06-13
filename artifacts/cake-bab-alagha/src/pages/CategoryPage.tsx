@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/Button";
+import { ProductSearchBar } from "@/components/ProductSearchBar";
 import { useCatalog } from "@/hooks/useCatalog";
 
 function ProductSkeleton() {
@@ -63,8 +64,10 @@ export default function CategoryPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* SEARCH BAR */}
+          <ProductSearchBar className="max-w-xl mb-8" />
+
           {loading ? (
-            /* Skeleton cards while loading */
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {Array.from({ length: 8 }).map((_, i) => <ProductSkeleton key={i} />)}
             </div>

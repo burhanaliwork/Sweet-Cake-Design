@@ -64,7 +64,7 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-[140px] h-[140px] group-hover:scale-105 transition-transform drop-shadow-md">
+            <div className="w-32 h-32 group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
                 src={`${import.meta.env.BASE_URL}images/logo.jpg`} 
                 alt="شعار مركز الموصل التسويقي" 

@@ -60,11 +60,12 @@ export default function Home() {
                   key={category.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileTap={{ scale: 0.97 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.05 }}
                 >
                   <Link href={`/category/${category.id}`}>
-                    <div className="group relative bg-card border border-border rounded-2xl overflow-hidden text-center cursor-pointer hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 active:scale-95 h-full flex flex-col items-center justify-center min-h-[160px]">
+                    <div className="group relative bg-card border border-border rounded-2xl overflow-hidden text-center cursor-pointer hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 transition-all duration-500 ease-out h-full flex flex-col items-center justify-center min-h-[160px]">
                       {category.image ? (
                         <div className="w-full h-28 overflow-hidden flex-shrink-0">
                           <img

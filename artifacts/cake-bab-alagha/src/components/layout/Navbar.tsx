@@ -64,16 +64,16 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-32 h-32 group-hover:scale-105 transition-transform drop-shadow-md">
+            <div className="w-[140px] h-[140px] group-hover:scale-105 transition-transform drop-shadow-md">
               <img 
-                src={`${import.meta.env.BASE_URL}images/logo-mosul.png`} 
-                alt="شعار باب الآغا" 
+                src={`${import.meta.env.BASE_URL}images/logo.jpg`} 
+                alt="شعار مركز الموصل التسويقي" 
                 className="w-full h-full object-contain"
               />
             </div>
             <div className="flex flex-col">
               <span className="font-black text-lg leading-snug tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] max-w-[160px]">
-                مركز الموصل لمنتجات مخابز باب الآغا
+                مركز الموصل التسويقي للمنتجات الصحية
               </span>
             </div>
           </Link>

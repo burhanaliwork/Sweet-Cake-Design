@@ -51,7 +51,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/50 text-sm">
-            مركز الموصل التسويقي لمنتجات شركة مخابز باب الآغا
+            مركز الموصل التسويقي للمنتجات الصحية
           </p>
           <div className="text-white/50 text-sm text-center">
             <p>صُنع بحب في العراق</p>

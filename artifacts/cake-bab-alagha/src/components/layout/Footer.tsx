@@ -10,11 +10,11 @@ export function Footer() {
 
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-24 h-24 drop-shadow-md">
+            <div className="w-16 h-16 rounded-full overflow-hidden drop-shadow-md flex-shrink-0">
               <img 
-                src={`${import.meta.env.BASE_URL}images/logo-mosul.png`} 
-                alt="شعار باب الآغا" 
-                className="w-full h-full object-contain"
+                src={`${import.meta.env.BASE_URL}images/logo.jpg`} 
+                alt="شعار مركز الموصل التسويقي" 
+                className="w-full h-full object-cover"
               />
             </div>
           </div>

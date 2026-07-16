@@ -64,11 +64,11 @@ export function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-32 h-32 group-hover:scale-105 transition-transform drop-shadow-md">
+            <div className="w-14 h-14 rounded-full overflow-hidden group-hover:scale-105 transition-transform drop-shadow-md flex-shrink-0">
               <img 
                 src={`${import.meta.env.BASE_URL}images/logo.jpg`} 
                 alt="شعار مركز الموصل التسويقي" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col">
